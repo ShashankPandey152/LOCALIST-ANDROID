@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.Settings;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -29,7 +30,9 @@ import com.android.siddhartha.localist.services.LocationMonitoringService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Locale;
+
+public class MainActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -45,12 +48,16 @@ public class MainActivity extends AppCompatActivity {
     private double INI_LAT = 28.0772;
     private double INI_LNG = 95.3120;
 
+    private TextToSpeech tts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mMsgView = (TextView) findViewById(R.id.msgView);
 
+        tts = new TextToSpeech(this, this);
+
+        mMsgView = (TextView) findViewById(R.id.msgView);
 
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 new BroadcastReceiver() {
@@ -62,13 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
                         if(Math.abs(INI_LAT - Double.parseDouble(latitude)) >= 0.0001 ||
                                 Math.abs(INI_LNG - Double.parseDouble(longitude)) >= 0.0001) {
-                            try {
-                                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-                                r.play();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                            speakOut("Change in location");
+                            Log.d("Localist", "Change in location!");
                         }
 
                         if (latitude != null && longitude != null) {
@@ -77,6 +79,27 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, new IntentFilter(LocationMonitoringService.ACTION_LOCATION_BROADCAST)
         );
+    }
+
+    @Override
+    public void onInit(int status) {
+        if(status == TextToSpeech.SUCCESS) {
+
+            int result = tts.setLanguage(Locale.UK);
+
+            if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "Language is not supported!");
+            } else {
+                speakOut("");
+            }
+
+        } else {
+            Log.e("TTS", "Initialization Failed!");
+        }
+    }
+
+    private void speakOut(String msg) {
+        tts.speak(msg, TextToSpeech.QUEUE_FLUSH, null);
     }
 
 
@@ -328,6 +351,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
 
+        if(tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
 
         //Stop location sharing service to app server.........
 
