@@ -11,20 +11,35 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private static boolean firstRun = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-//        Intent intent1 = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//        startActivity(intent1);
+        if(firstRun) {
+            Intent intent1 = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent1);
 
-        showAlertSound();
+            showAlertSound();
+
+            firstRun = !firstRun;
+        }
+
+        com.github.clans.fab.FloatingActionButton addLocationFabBtn = findViewById(R.id.addLocationFabBtn);
+
+        addLocationFabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoAddLocation = new Intent(getApplicationContext(), AddLocationActivity.class);
+                startActivity(gotoAddLocation);
+            }
+        });
 
     }
 
