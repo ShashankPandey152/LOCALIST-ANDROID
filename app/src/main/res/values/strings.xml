@@ -9,4 +9,5 @@
     <string name="msg_location_service_not_started">Location Tracking Not Started</string>
     <string name="msg_location_service_started">Location Tracking Started</string>
     <string name="btn_label_refresh">Refresh</string>
+    <string name="title_activity_home">HomeActivity</string>
 </resources>
