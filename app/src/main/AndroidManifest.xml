@@ -47,10 +47,14 @@
         <activity
             android:name=".AddLocationActivity"
             android:label="@string/title_activity_add_location"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".AllLocationActivity"
             android:label="@string/title_activity_all_location"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".EditLocationActivity"
+            android:label="@string/title_activity_edit_location"
             android:theme="@style/AppTheme"></activity>
     </application>
 

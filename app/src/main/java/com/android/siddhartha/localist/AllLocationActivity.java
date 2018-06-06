@@ -84,11 +84,16 @@ public class AllLocationActivity extends AppCompatActivity {
                             adapter = new AllLocationAdapter(getApplicationContext(), listLocation, new CustomItemClickListener() {
                                 @Override
                                 public void onItemClick(View v, int position) {
-                                    Toast.makeText(getApplicationContext(), listLocation.get(position).getLocationId(),
-                                            Toast.LENGTH_SHORT).show();
+                                    Intent gotoEditLocation = new Intent(AllLocationActivity.this,
+                                            EditLocationActivity.class);
+                                    gotoEditLocation.putExtra("name", listLocation.get(position).getLocationName());
+                                    gotoEditLocation.putExtra("latitude", listLocation.get(position).getLatitude());
+                                    gotoEditLocation.putExtra("longitude", listLocation.get(position).getLongitude());
+                                    gotoEditLocation.putExtra("id", listLocation.get(position).getLocationId());
+                                    startActivity(gotoEditLocation);
                                 }
                             });
-                            
+
                             RecyclerView allLocationRecyclerView = findViewById(R.id.allLocationRecylcerView);
                             allLocationRecyclerView.setAdapter(adapter);
 

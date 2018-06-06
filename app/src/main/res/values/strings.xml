@@ -12,4 +12,5 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_add_location">AddLocationActivity</string>
     <string name="title_activity_all_location">AllLocationActivity</string>
+    <string name="title_activity_edit_location">EditLocationActivity</string>
 </resources>
