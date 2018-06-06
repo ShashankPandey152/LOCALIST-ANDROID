@@ -8,7 +8,6 @@
     tools:context="com.android.siddhartha.localist.AddLocationActivity"
     tools:showIn="@layout/activity_add_location">
 
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"

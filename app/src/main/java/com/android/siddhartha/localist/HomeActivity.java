@@ -51,6 +51,16 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        com.github.clans.fab.FloatingActionButton addItemFabBtn = findViewById(R.id.addItemFabBtn);
+
+        addItemFabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoAddItem = new Intent(getApplicationContext(), AddItemActivity.class);
+                startActivity(gotoAddItem);
+            }
+        });
+
     }
 
     private void showAlertSound() {
