@@ -11,4 +11,5 @@
     <string name="btn_label_refresh">Refresh</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_add_location">AddLocationActivity</string>
+    <string name="title_activity_all_location">AllLocationActivity</string>
 </resources>

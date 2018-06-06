@@ -41,6 +41,16 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        com.github.clans.fab.FloatingActionButton allLocationFabBtn = findViewById(R.id.allLocationFabBtn);
+
+        allLocationFabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoAllLocation = new Intent(getApplicationContext(), AllLocationActivity.class);
+                startActivity(gotoAllLocation);
+            }
+        });
+
     }
 
     private void showAlertSound() {
