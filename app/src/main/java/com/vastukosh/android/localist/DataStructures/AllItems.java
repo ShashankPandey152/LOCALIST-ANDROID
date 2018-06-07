@@ -1,4 +1,4 @@
-package com.android.siddhartha.localist.DataStructures;
+package com.vastukosh.android.localist.DataStructures;
 
 public class AllItems {
 

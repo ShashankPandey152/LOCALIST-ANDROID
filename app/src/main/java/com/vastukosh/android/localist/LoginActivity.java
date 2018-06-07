@@ -1,9 +1,10 @@
-package com.android.siddhartha.localist;
+package com.vastukosh.android.localist;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,34 +19,38 @@ import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
-public class SignupActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
+
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-    }
+        setContentView(R.layout.activity_login);
 
-    public void signupBtnClicked(View view) {
+        sp = getSharedPreferences("login", MODE_PRIVATE);
 
-        EditText name = findViewById(R.id.signNameText);
-        String nameString = name.getText().toString();
-        EditText email = findViewById(R.id.signEmailText);
-        String emailString = email.getText().toString();
-        EditText password = findViewById(R.id.signPasswordText);
-        String passwordString = password.getText().toString();
-        EditText confirmPassword = findViewById(R.id.signConfirmPasswordText);
-        String confirmPasswordString = confirmPassword.getText().toString();
-
-        CheckBox terms = findViewById(R.id.agreeToTerms);
-
-        Boolean agreed = false;
-        if(terms.isChecked()) {
-            agreed = !agreed;
+        if(sp.getBoolean("logged", false)) {
+            Intent gotoHome = new Intent(this, HomeActivity.class);
+            startActivity(gotoHome);
         }
 
-        if(nameString.matches("") || emailString.matches("") || passwordString.matches("") ||
-                confirmPasswordString.matches("") || !agreed) {
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if(sp.getBoolean("logged", false));
+    }
+
+    public void loginBtnClicked(View view) {
+        EditText email = findViewById(R.id.logEmailText);
+        final String emailString = email.getText().toString();
+        EditText password = findViewById(R.id.logPasswordText);
+        String passwordString = password.getText().toString();
+
+        if(emailString.matches("") || passwordString.matches("")) {
             Toast.makeText(getApplicationContext(), "Complete the form!", Toast.LENGTH_SHORT).show();
         } else {
 
@@ -55,18 +60,15 @@ public class SignupActivity extends AppCompatActivity {
                 errorString += "Invalid email address!\r\n";
             }
 
-            if(!passwordString.equals(confirmPasswordString)) {
-                errorString += "Passwords do not match!\r\n";
-            } else if(passwordString.length() < 8) {
+            if(passwordString.length() < 8) {
                 errorString += "Password cannot be less than 8 characters!";
             }
 
             if(errorString.length() == 0) {
 
-                Toast.makeText(getApplicationContext(), "Signing you up...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Logging you in...", Toast.LENGTH_SHORT).show();
 
-                final String url = "http://localist-com.stackstaging.com/?signup=1&email=" +
-                        emailString + "&password=" + passwordString + "&name=" + nameString;
+                final String url = "http://localist-com.stackstaging.com/?login=1&email=" + emailString + "&password=" + passwordString;
 
                 // Request a string response
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -80,11 +82,15 @@ public class SignupActivity extends AppCompatActivity {
                                     String status = jsonObject.getString("status");
 
                                     if(status.matches("1")) {
-                                        Toast.makeText(getApplicationContext(), "Signup successful!\r\nVerify Email address!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
+                                        Intent gotoHome = new Intent(getApplicationContext(), HomeActivity.class);
+                                        sp.edit().putBoolean("logged", true).apply();
+                                        sp.edit().putString("email", emailString).apply();
+                                        startActivity(gotoHome);
                                     } else if(status.matches("0")) {
-                                        Toast.makeText(getApplicationContext(), "Oops, there was some error. Please come back later!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Account does not exist!", Toast.LENGTH_SHORT).show();
                                     } else if(status.matches("2")) {
-                                        Toast.makeText(getApplicationContext(), "Account already exists!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Incorrect credentials!", Toast.LENGTH_SHORT).show();
                                     } else if(status.matches("-1")) {
                                         Toast.makeText(getApplicationContext(), "Oops, there was some error. Please come back later!", Toast.LENGTH_SHORT).show();
                                     }
@@ -113,22 +119,30 @@ public class SignupActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    public void logForgotBtnClicked(View view) {
+
+        Intent gotoForgot = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+        startActivity(gotoForgot);
+
+    }
+
+    public void logSignupBtnClicked(View view) {
+
+        Intent gotoSignup = new Intent(getApplicationContext(), SignupActivity.class);
+        startActivity(gotoSignup);
 
     }
 
     public Boolean isEmailValid(String email) {
         return Pattern.compile(
                 "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
-                        + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                        + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9]))|"
-                        + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9]))|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
         ).matcher(email).matches();
-    }
-
-    public String encodeString(String str) {
-        str = str.replace(" ", "%20");
-        return str;
     }
 }

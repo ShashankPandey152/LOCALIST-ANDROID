@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.android.siddhartha.localist.LoginActivity">
+    tools:context="com.android.siddhartha.localist.com.vastukosh.siddhartha.localist.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView2"

@@ -1,4 +1,4 @@
-package com.android.siddhartha.localist.Interfaces;
+package com.vastukosh.android.localist.Interfaces;
 
 import android.view.View;
 

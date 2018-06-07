@@ -1,4 +1,4 @@
-package com.android.siddhartha.localist.settings;
+package com.vastukosh.android.localist.settings;
 
 public class Constants {
 

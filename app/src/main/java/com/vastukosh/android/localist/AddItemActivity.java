@@ -1,23 +1,16 @@
-package com.android.siddhartha.localist;
+package com.vastukosh.android.localist;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.siddhartha.localist.Adapters.AllLocationAdapter;
-import com.android.siddhartha.localist.DataStructures.AllLocation;
-import com.android.siddhartha.localist.Interfaces.CustomItemClickListener;
+import com.vastukosh.android.localist.Adapters.AllLocationAdapter;
+import com.vastukosh.android.localist.DataStructures.AllLocation;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;

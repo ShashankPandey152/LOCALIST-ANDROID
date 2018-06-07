@@ -1,19 +1,14 @@
-package com.android.siddhartha.localist.Adapters;
+package com.vastukosh.android.localist.Adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.siddhartha.localist.DataStructures.AllLocation;
-import com.android.siddhartha.localist.Interfaces.CustomItemClickListener;
-import com.android.siddhartha.localist.R;
+import com.vastukosh.android.localist.DataStructures.AllLocation;
+import com.vastukosh.android.localist.Interfaces.CustomItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +32,7 @@ public class AllLocationAdapter extends RecyclerView.Adapter<AllLocationAdapter.
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.single_location, parent, false);
+        View view = LayoutInflater.from(context).inflate(com.vastukosh.android.localist.R.layout.single_location, parent, false);
         final Holder holder = new Holder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +55,7 @@ public class AllLocationAdapter extends RecyclerView.Adapter<AllLocationAdapter.
 
         public Holder(View locationView) {
             super(locationView);
-            locationNameText = locationView.findViewById(R.id.locationNameText);
+            locationNameText = locationView.findViewById(com.vastukosh.android.localist.R.id.locationNameText);
         }
 
         public void bindLocation(AllLocation allLocation, Context context) {

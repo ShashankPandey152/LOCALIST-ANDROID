@@ -1,4 +1,4 @@
-package com.android.siddhartha.localist.Adapters;
+package com.vastukosh.android.localist.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.siddhartha.localist.DataStructures.AllItems;
-import com.android.siddhartha.localist.Interfaces.CustomItemClickListener;
-import com.android.siddhartha.localist.R;
+import com.vastukosh.android.localist.DataStructures.AllItems;
+import com.vastukosh.android.localist.Interfaces.CustomItemClickListener;
+import com.vastukosh.android.localist.R;
 
 import java.util.ArrayList;
 import java.util.List;

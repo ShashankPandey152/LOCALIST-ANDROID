@@ -1,4 +1,4 @@
-package com.android.siddhartha.localist;
+package com.vastukosh.android.localist;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

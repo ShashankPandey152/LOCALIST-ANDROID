@@ -1,4 +1,4 @@
-package com.android.siddhartha.localist;
+package com.vastukosh.android.localist;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -25,21 +23,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.SparseBooleanArray;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.siddhartha.localist.Adapters.AllItemsAdapter;
-import com.android.siddhartha.localist.DataStructures.AllItems;
-import com.android.siddhartha.localist.Interfaces.CustomItemClickListener;
-import com.android.siddhartha.localist.services.LocationMonitoringService;
+import com.vastukosh.android.localist.Adapters.AllItemsAdapter;
+import com.vastukosh.android.localist.DataStructures.AllItems;
+import com.vastukosh.android.localist.Interfaces.CustomItemClickListener;
+import com.vastukosh.android.localist.services.LocationMonitoringService;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -52,14 +44,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
