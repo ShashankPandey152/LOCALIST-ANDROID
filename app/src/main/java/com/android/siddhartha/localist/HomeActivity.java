@@ -126,9 +126,6 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
                                 }
                             }
 
-                            Log.d("latitudes", latitudes.toString());
-                            Log.d("longitudes", longitudes.toString());
-
                             final ArrayList<AllItems> listItems = new ArrayList<>();
                             AllItemsAdapter adapter;
 
@@ -158,8 +155,6 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
                                         sp.edit().putInt("checked", 0).apply();
                                     }
                                 }
-
-                                Log.d("CountItems", countItem.toString());
 
                                 adapter = new AllItemsAdapter(getApplicationContext(), listItems, new CustomItemClickListener() {
                                     @Override
@@ -219,8 +214,6 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
                         String latitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LATITUDE);
                         String longitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LONGITUDE);
 
-                        Log.d("TAGemptylist", String.valueOf(emptyList[0]));
-
                         if(emptyList[0] == 0) {
                             double distance;
                             Iterator iterator = latitudes.entrySet().iterator();
@@ -232,23 +225,17 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
                                 distance = countDistance(Double.parseDouble(latitude), Double.parseDouble(longitude),
                                         Double.valueOf(pair.getValue().toString()), Double.valueOf(pair1.getValue().toString()));
 
-                                Log.d((String) pair.getKey(), String.valueOf(distance));
-
                                 String key = pair.getKey().toString();
-
-                                Log.d("Completed", completed.toString());
 
                                 if(distance < 1.2 && completed.get(key) == 0 && countItem.get(key) > 0) {
                                     String item = "item";
                                     if(countItem.get(key) > 1) {
                                         item = "items";
                                     }
-                                    Log.d("Hello", String.valueOf(countItem.get(key)));
                                     speakOut("You have to buy!" + countItem.get(key) + item + " from " + key);
                                     completed.put(pair.getKey().toString(), 1);
                                 }
 
-                                Log.d("Completed", completed.toString());
                             }
                         }
 
@@ -572,7 +559,6 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
         // Provide an additional rationale to the img_user. This would happen if the img_user denied the
         // request previously, but didn't check the "Don't ask again" checkbox.
         if (shouldProvideRationale || shouldProvideRationale2) {
-            Log.i(TAG, "Displaying permission rationale to provide additional context.");
             showSnackbar(R.string.permission_rationale,
                     android.R.string.ok, new View.OnClickListener() {
                         @Override
@@ -584,7 +570,6 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
                         }
                     });
         } else {
-            Log.i(TAG, "Requesting permission");
             // Request permission. It's possible this can be auto answered if device policy
             // sets the permission in a given state or the img_user denied the permission
             // previously and checked "Never ask again".
@@ -617,15 +602,11 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        Log.i(TAG, "onRequestPermissionResult");
         if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
             if (grantResults.length <= 0) {
                 // If img_user interaction was interrupted, the permission request is cancelled and you
                 // receive empty arrays.
-                Log.i(TAG, "User interaction was cancelled.");
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                Log.i(TAG, "Permission granted, updates requested, starting location updates");
                 startStep3();
 
             } else {

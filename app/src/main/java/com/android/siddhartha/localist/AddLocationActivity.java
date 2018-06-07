@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -59,6 +60,8 @@ public class AddLocationActivity extends AppCompatActivity {
 
         Button fetchLocationBtn = findViewById(R.id.fetchLocationBtn);
 
+        showAlertLocation();
+
         fetchLocationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +88,31 @@ public class AddLocationActivity extends AppCompatActivity {
         });
 
     }
+
+    private void showAlertLocation() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Make sure you are in the location you want to add!");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        final AlertDialog alert11 = builder1.create();
+
+        alert11.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                alert11.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1919ff"));
+            }
+        });
+        alert11.show();
+    }
+
 
     public void putLocation(View view) {
 
@@ -302,7 +330,6 @@ public class AddLocationActivity extends AppCompatActivity {
         // Provide an additional rationale to the img_user. This would happen if the img_user denied the
         // request previously, but didn't check the "Don't ask again" checkbox.
         if (shouldProvideRationale || shouldProvideRationale2) {
-            Log.i(TAG, "Displaying permission rationale to provide additional context.");
             showSnackbar(R.string.permission_rationale,
                     android.R.string.ok, new View.OnClickListener() {
                         @Override
@@ -314,7 +341,6 @@ public class AddLocationActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            Log.i(TAG, "Requesting permission");
             // Request permission. It's possible this can be auto answered if device policy
             // sets the permission in a given state or the img_user denied the permission
             // previously and checked "Never ask again".
@@ -347,15 +373,11 @@ public class AddLocationActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        Log.i(TAG, "onRequestPermissionResult");
         if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
             if (grantResults.length <= 0) {
                 // If img_user interaction was interrupted, the permission request is cancelled and you
                 // receive empty arrays.
-                Log.i(TAG, "User interaction was cancelled.");
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                Log.i(TAG, "Permission granted, updates requested, starting location updates");
                 startStep3();
 
             } else {
