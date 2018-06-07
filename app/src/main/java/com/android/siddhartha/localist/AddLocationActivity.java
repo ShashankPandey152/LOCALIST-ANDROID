@@ -70,7 +70,6 @@ public class AddLocationActivity extends AppCompatActivity {
                                 String latitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LATITUDE);
                                 String longitude = intent.getStringExtra(LocationMonitoringService.EXTRA_LONGITUDE);
 
-
                                 if (latitude != null && longitude != null) {
                                     TextView latitudeText = findViewById(R.id.addLocationLatitude);
                                     latitudeText.setText("Latitude: " + latitude);
@@ -92,7 +91,7 @@ public class AddLocationActivity extends AppCompatActivity {
         EditText nameText = findViewById(R.id.addLocationNameText);
         String name = nameText.getText().toString();
 
-        String emailString = "sdharchou@gmail.com";
+        String emailString = getIntent().getStringExtra("email");
 
         if(name.matches("") || Latitude == 0 || Longitude == 0) {
             Toast.makeText(getApplicationContext(), "Complete the form!", Toast.LENGTH_SHORT).show();

@@ -33,10 +33,10 @@ public class EditLocationActivity extends AppCompatActivity {
         nameEditText.setText(getIntent().getStringExtra("name"));
 
         TextView latitudeText = findViewById(R.id.latitudeText);
-        latitudeText.setText(getIntent().getStringExtra("latitude"));
+        latitudeText.setText("Latitude: " + getIntent().getStringExtra("latitude"));
 
         TextView longitudeText = findViewById(R.id.longitudeText);
-        longitudeText.setText(getIntent().getStringExtra("longitude"));
+        longitudeText.setText("Longitude: " + getIntent().getStringExtra("longitude"));
 
     }
 

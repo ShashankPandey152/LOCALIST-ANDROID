@@ -43,7 +43,7 @@ public class AllLocationActivity extends AppCompatActivity {
 
     private void parseJSONLocations() {
 
-        String emailString = "sdharchou@gmail.com";
+        final String emailString = getIntent().getStringExtra("email");
 
         Toast.makeText(getApplicationContext(), "Fetching locations...", Toast.LENGTH_SHORT).show();
 

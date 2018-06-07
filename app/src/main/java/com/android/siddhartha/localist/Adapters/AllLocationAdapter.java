@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.android.siddhartha.localist.DataStructures.AllLocation;
 import com.android.siddhartha.localist.Interfaces.CustomItemClickListener;
-import com.android.siddhartha.localist.MainActivity;
 import com.android.siddhartha.localist.R;
 
 import java.util.ArrayList;

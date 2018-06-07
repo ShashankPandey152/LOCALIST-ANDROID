@@ -28,6 +28,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -72,7 +74,7 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
     private boolean mAlreadyStartedService = false;
 
-    SharedPreferences sp;
+    SharedPreferences sp, sp1;
 
     private TextToSpeech tts;
 
@@ -82,6 +84,7 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
         setContentView(R.layout.activity_home);
 
         sp = getSharedPreferences("checklist", Context.MODE_PRIVATE);
+        sp1 = getSharedPreferences("login", Context.MODE_PRIVATE);
 
         tts = new TextToSpeech(this, this);
 
@@ -94,7 +97,7 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
         final int[] emptyList = {0};
 
-        String emailString = "sdharchou@gmail.com";
+        final String emailString = sp1.getString("email", "");
 
         final String url = "http://localist-com.stackstaging.com/?getChecklist=1&email=" + emailString;
 
@@ -170,7 +173,7 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
                                             v.setBackgroundColor(Color.parseColor("#408c40"));
                                             if(sp.getInt("checked", -1) == listItems.size()) {
                                                 Toast.makeText(getApplicationContext(), "All complete!", Toast.LENGTH_SHORT).show();
-                                                deleteList();
+                                                deleteList(emailString);
                                             }
                                         } else {
                                             selectedItem.put(currentItem, false);
@@ -262,14 +265,13 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
             firstRun = !firstRun;
         }
 
-        parseJSONItems();
-
         com.github.clans.fab.FloatingActionButton addLocationFabBtn = findViewById(R.id.addLocationFabBtn);
 
         addLocationFabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent gotoAddLocation = new Intent(getApplicationContext(), AddLocationActivity.class);
+                gotoAddLocation.putExtra("email", emailString);
                 startActivity(gotoAddLocation);
             }
         });
@@ -280,6 +282,7 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
             @Override
             public void onClick(View v) {
                 Intent gotoAllLocation = new Intent(getApplicationContext(), AllLocationActivity.class);
+                gotoAllLocation.putExtra("email", emailString);
                 startActivity(gotoAllLocation);
             }
         });
@@ -290,7 +293,19 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
             @Override
             public void onClick(View v) {
                 Intent gotoAddItem = new Intent(getApplicationContext(), AddItemActivity.class);
+                gotoAddItem.putExtra("email", emailString);
                 startActivity(gotoAddItem);
+            }
+        });
+
+        Button logoutBtn = findViewById(R.id.logoutBtn);
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                sp1.edit().putBoolean("logged", false).apply();
+                startActivity(gotoLogin);
             }
         });
 
@@ -335,47 +350,7 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
         }
     }
 
-    private void parseJSONItems() {
-
-        String emailString = "sdharchou@gmail.com";
-
-        final String url = "http://localist-com.stackstaging.com/?getChecklist=1&email=" + emailString;
-
-        // Request a string response
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                // Error handling
-                System.out.println("Something went wrong!");
-                error.printStackTrace();
-
-            }
-        });
-
-        // Add the request to the queue
-        Volley.newRequestQueue(this).add(stringRequest);
-
-    }
-
-    private void deleteList() {
-
-        String emailString = "sdharchou@gmail.com";
+    private void deleteList(String emailString) {
 
         final String url = "http://localist-com.stackstaging.com/?deleteChecklist=1&email=" + emailString;
 

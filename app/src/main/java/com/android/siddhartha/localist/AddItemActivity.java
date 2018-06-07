@@ -49,7 +49,7 @@ public class AddItemActivity extends AppCompatActivity {
         String location = locationsSpinner.getSelectedItem().toString();
         location = location.split(":")[0];
 
-        String emailString = "sdharchou@gmail.com";
+        String emailString = getIntent().getStringExtra("email");
 
         if(itemName.matches("") || location.matches("--Select a location--")) {
             Toast.makeText(getApplicationContext(), "Complete the form!", Toast.LENGTH_SHORT).show();
@@ -104,7 +104,7 @@ public class AddItemActivity extends AppCompatActivity {
 
     private void parseJSONLocations() {
 
-        String emailString = "sdharchou@gmail.com";
+        String emailString = getIntent().getStringExtra("email");
         final ArrayList<String> locations = new ArrayList<>();
         locations.add("--Select a location--");
 

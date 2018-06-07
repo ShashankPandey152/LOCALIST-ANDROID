@@ -1,6 +1,7 @@
 package com.android.siddhartha.localist;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,18 +24,32 @@ import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextToSpeech tts;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        sp = getSharedPreferences("login", MODE_PRIVATE);
+
+        if(sp.getBoolean("logged", false)) {
+            Intent gotoHome = new Intent(this, HomeActivity.class);
+            startActivity(gotoHome);
+        }
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if(sp.getBoolean("logged", false));
     }
 
     public void loginBtnClicked(View view) {
         EditText email = findViewById(R.id.logEmailText);
-        String emailString = email.getText().toString();
+        final String emailString = email.getText().toString();
         EditText password = findViewById(R.id.logPasswordText);
         String passwordString = password.getText().toString();
 
@@ -71,6 +86,10 @@ public class LoginActivity extends AppCompatActivity {
 
                                     if(status.matches("1")) {
                                         Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
+                                        Intent gotoHome = new Intent(getApplicationContext(), HomeActivity.class);
+                                        sp.edit().putBoolean("logged", true).apply();
+                                        sp.edit().putString("email", emailString).apply();
+                                        startActivity(gotoHome);
                                     } else if(status.matches("0")) {
                                         Toast.makeText(getApplicationContext(), "Account does not exist!", Toast.LENGTH_SHORT).show();
                                     } else if(status.matches("2")) {

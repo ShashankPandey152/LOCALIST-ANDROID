@@ -19,6 +19,7 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -26,6 +27,15 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/montserrat_bold"
                 android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/logoutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LOGOUT"
+                android:background="@android:color/transparent"
+                android:layout_gravity="end"/>
+
 
         </android.support.v7.widget.Toolbar>
 
