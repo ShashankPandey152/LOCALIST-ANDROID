@@ -31,10 +31,6 @@ public class AllLocationAdapter extends RecyclerView.Adapter<AllLocationAdapter.
         this.listener = listener;
     }
 
-    public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
-    }
-
     @Override
     public void onBindViewHolder(Holder holder, int position) {
         holder.bindLocation(location.get(position), context);
@@ -62,7 +58,6 @@ public class AllLocationAdapter extends RecyclerView.Adapter<AllLocationAdapter.
 
         public View locationView;
         public TextView locationNameText;
-        public OnItemClickListener mItemClickListener;
 
         public Holder(View locationView) {
             super(locationView);
