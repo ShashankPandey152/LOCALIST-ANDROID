@@ -158,6 +158,7 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
                                         listItems.add(new AllItems((String) items.get(i), key));
                                         selectedItem.put(items.get(i).toString(), false);
                                         sp.edit().putInt("checked", 0).apply();
+                                        sp.edit().putInt((String) items.get(i), 0).apply();;
                                     }
                                 }
 
@@ -171,6 +172,7 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
                                             int currentChecked = sp.getInt("checked", -1);
                                             sp.edit().putInt("checked", currentChecked + 1).apply();
                                             v.setBackgroundColor(Color.parseColor("#408c40"));
+                                            sp.edit().putInt(currentItem, 1).apply();
                                             if(sp.getInt("checked", -1) == listItems.size()) {
                                                 Toast.makeText(getApplicationContext(), "All complete!", Toast.LENGTH_SHORT).show();
                                                 deleteList(emailString);
