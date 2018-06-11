@@ -130,6 +130,22 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
                             if(emptyList[0] == 1) {
                                 Toast.makeText(getApplicationContext(), "Empty list!", Toast.LENGTH_SHORT).show();
+                                listItems.add(new AllItems("Add items to list", "Empty list"));
+
+                                adapter = new AllItemsAdapter(getApplicationContext(), listItems, new CustomItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View v, int position) {
+                                        Toast.makeText(getApplicationContext(), "Empty list!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                                RecyclerView itemsRecyclerView = findViewById(R.id.itemsRecyclerView);
+                                itemsRecyclerView.setAdapter(adapter);
+
+                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                                itemsRecyclerView.setLayoutManager(layoutManager);
+                                itemsRecyclerView.setHasFixedSize(true);
+
                             } else {
                                 final HashMap<String, Boolean> selectedItem = new HashMap<>();
 
