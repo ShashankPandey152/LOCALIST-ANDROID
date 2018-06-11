@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.android.siddhartha.localist.com.vastukosh.siddhartha.localist.SignupActivity">
+    tools:context="com.vastukosh.android.localist.SignupActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -152,7 +152,7 @@
                     android:id="@+id/signConfirmPasswordText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="Confirm Password"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
                     android:inputType="textPassword"
