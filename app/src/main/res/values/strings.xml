@@ -14,4 +14,7 @@
     <string name="title_activity_all_location">AllLocationActivity</string>
     <string name="title_activity_edit_location">EditLocationActivity</string>
     <string name="title_activity_add_item">AddItemActivity</string>
+    <string name="please_verify_your_email_to_continue_using_localist">Please verify your email to continue using localist.</string>
+    <string name="if_you_accidentally_deleted_the_verification_email_please_click_on_resend">If you accidentally deleted the verification email, please click on resend</string>
+    <string name="resend">Resend</string>
 </resources>

@@ -50,7 +50,7 @@ public class AddItemActivity extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "Adding item...", Toast.LENGTH_SHORT).show();
 
-            final String url = "http://localist-com.stackstaging.com/?addItem=1&email=" + emailString +
+            final String url = "http://localist.000webhostapp.com/?addItem=1&email=" + emailString +
                     "&store=" + devoidOfSpace(location) + "&item=" + devoidOfSpace(itemName);
 
             // Request a string response
@@ -101,7 +101,7 @@ public class AddItemActivity extends AppCompatActivity {
         final ArrayList<String> locations = new ArrayList<>();
         locations.add("--Select a location--");
 
-        final String url = "http://localist-com.stackstaging.com/?location=2&email=" + emailString;
+        final String url = "http://localist.000webhostapp.com/?location=2&email=" + emailString;
 
         // Request a string response
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

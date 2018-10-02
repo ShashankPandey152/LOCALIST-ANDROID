@@ -88,7 +88,7 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
         final String emailString = sp1.getString("email", "");
 
-        final String url = "http://localist-com.stackstaging.com/?getChecklist=1&email=" + emailString;
+        final String url = "http://localist.000webhostapp.com/?getChecklist=1&email=" + emailString;
 
         // Request a string response
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -346,7 +346,7 @@ public class HomeActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
     private void deleteList(String emailString) {
 
-        final String url = "http://localist-com.stackstaging.com/?deleteChecklist=1&email=" + emailString;
+        final String url = "http://localist.000webhostapp.com/?deleteChecklist=1&email=" + emailString;
 
         // Request a string response
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

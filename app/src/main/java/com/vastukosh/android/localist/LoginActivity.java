@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginBtnClicked(View view) {
-        EditText email = findViewById(R.id.logEmailText);
+        final EditText email = findViewById(R.id.logEmailText);
         final String emailString = email.getText().toString();
         EditText password = findViewById(R.id.logPasswordText);
         String passwordString = password.getText().toString();
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Logging you in...", Toast.LENGTH_SHORT).show();
 
-                final String url = "http://localist-com.stackstaging.com/?login=1&email=" + emailString + "&password=" + passwordString;
+                final String url = "http://localist.000webhostapp.com/?login=1&email=" + emailString + "&password=" + passwordString;
 
                 // Request a string response
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -93,6 +93,11 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Incorrect credentials!", Toast.LENGTH_SHORT).show();
                                     } else if(status.matches("-1")) {
                                         Toast.makeText(getApplicationContext(), "Oops, there was some error. Please come back later!", Toast.LENGTH_SHORT).show();
+                                    } else if(status.matches("3")) {
+                                        Toast.makeText(getApplicationContext(), "Email not verified!", Toast.LENGTH_SHORT).show();
+                                        Intent emailVerifyIntent = new Intent(getApplicationContext(), EmailVerifyActivity.class);
+                                        emailVerifyIntent.putExtra("email", emailString);
+                                        startActivity(emailVerifyIntent);
                                     }
 
                                 } catch (JSONException e) {
