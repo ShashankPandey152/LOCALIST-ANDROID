@@ -1,4 +1,4 @@
-package com.vastukosh.android.localist.DataStructures;
+package com.vastukosh.app.localist.DataStructures;
 
 public class AllLocation {
 

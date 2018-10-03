@@ -1,4 +1,4 @@
-package com.vastukosh.android.localist;
+package com.vastukosh.app.localist;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -28,10 +28,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.vastukosh.android.localist.Adapters.AllItemsAdapter;
-import com.vastukosh.android.localist.DataStructures.AllItems;
-import com.vastukosh.android.localist.Interfaces.CustomItemClickListener;
-import com.vastukosh.android.localist.services.LocationMonitoringService;
+import com.vastukosh.app.localist.Adapters.AllItemsAdapter;
+import com.vastukosh.app.localist.DataStructures.AllItems;
+import com.vastukosh.app.localist.Interfaces.CustomItemClickListener;
+import com.vastukosh.app.localist.services.LocationMonitoringService;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;

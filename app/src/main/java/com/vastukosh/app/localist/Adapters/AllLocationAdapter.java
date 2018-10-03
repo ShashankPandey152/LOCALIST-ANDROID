@@ -1,4 +1,4 @@
-package com.vastukosh.android.localist.Adapters;
+package com.vastukosh.app.localist.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.vastukosh.android.localist.DataStructures.AllLocation;
-import com.vastukosh.android.localist.Interfaces.CustomItemClickListener;
+import com.vastukosh.app.localist.DataStructures.AllLocation;
+import com.vastukosh.app.localist.Interfaces.CustomItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class AllLocationAdapter extends RecyclerView.Adapter<AllLocationAdapter.
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(com.vastukosh.android.localist.R.layout.single_location, parent, false);
+        View view = LayoutInflater.from(context).inflate(com.vastukosh.app.localist.R.layout.single_location, parent, false);
         final Holder holder = new Holder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class AllLocationAdapter extends RecyclerView.Adapter<AllLocationAdapter.
 
         public Holder(View locationView) {
             super(locationView);
-            locationNameText = locationView.findViewById(com.vastukosh.android.localist.R.id.locationNameText);
+            locationNameText = locationView.findViewById(com.vastukosh.app.localist.R.id.locationNameText);
         }
 
         public void bindLocation(AllLocation allLocation, Context context) {

@@ -1,4 +1,4 @@
-package com.vastukosh.android.localist;
+package com.vastukosh.app.localist;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.vastukosh.android.localist.Adapters.AllLocationAdapter;
-import com.vastukosh.android.localist.DataStructures.AllLocation;
+import com.vastukosh.app.localist.Adapters.AllLocationAdapter;
+import com.vastukosh.app.localist.DataStructures.AllLocation;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;

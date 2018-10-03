@@ -1,10 +1,9 @@
-package com.vastukosh.android.localist;
+package com.vastukosh.app.localist;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -16,33 +15,32 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EmailVerifyActivity extends AppCompatActivity {
+import java.util.regex.Pattern;
+
+public class ForgotPasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_email_verify);
+        setContentView(R.layout.activity_forgot_password);
+    }
 
-        Button logoutBtn = findViewById(R.id.logoutBtn);
+    public void forgotBtnClicked(View view) {
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent gotoLogin = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(gotoLogin);
-            }
-        });
+        EditText email = findViewById(R.id.forgotEmailText);
+        String emailString = email.getText().toString();
 
-        Button resendBtn = findViewById(R.id.resendBtn);
+        if(emailString.matches("")) {
+            Toast.makeText(getApplicationContext(), "Complete the form!", Toast.LENGTH_SHORT).show();
+        } else {
 
-        resendBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String emailString = getIntent().getStringExtra("email");
+            if(!isEmailValid(emailString)) {
+                Toast.makeText(getApplicationContext(), "Invalid email address!", Toast.LENGTH_SHORT).show();
+            } else {
 
                 Toast.makeText(getApplicationContext(), "Sending mail...", Toast.LENGTH_SHORT).show();
 
-                final String url = "http://localist.000webhostapp.com/?resend=1&email=" + emailString;
+                final String url = "http://localist.000webhostapp.com/?forgot=1&email=" + emailString;
 
                 // Request a string response
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -56,10 +54,9 @@ public class EmailVerifyActivity extends AppCompatActivity {
                                     String status = jsonObject.getString("status");
 
                                     if(status.matches("1")) {
-                                        Toast.makeText(getApplicationContext(), "Mail sent successfully!", Toast.LENGTH_SHORT).show();
-                                        Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                                        startActivity(loginIntent);
-
+                                        Toast.makeText(getApplicationContext(), "Email sent successfully!", Toast.LENGTH_SHORT).show();
+                                    } else if(status.matches("0")) {
+                                        Toast.makeText(getApplicationContext(), "Account does not exist!", Toast.LENGTH_SHORT).show();
                                     } else if(status.matches("-1")) {
                                         Toast.makeText(getApplicationContext(), "Oops, there was some error. Please come back later!", Toast.LENGTH_SHORT).show();
                                     }
@@ -81,9 +78,22 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 });
 
                 // Add the request to the queue
-                Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                Volley.newRequestQueue(this).add(stringRequest);
+
             }
-        });
+
+        }
+
     }
 
+    public Boolean isEmailValid(String email) {
+        return Pattern.compile(
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9]))|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
+        ).matcher(email).matches();
+    }
 }

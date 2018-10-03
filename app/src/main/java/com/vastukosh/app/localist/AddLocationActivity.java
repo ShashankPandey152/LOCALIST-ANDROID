@@ -1,4 +1,4 @@
-package com.vastukosh.android.localist;
+package com.vastukosh.app.localist;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -25,7 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vastukosh.android.localist.services.LocationMonitoringService;
+import com.vastukosh.app.localist.services.LocationMonitoringService;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
