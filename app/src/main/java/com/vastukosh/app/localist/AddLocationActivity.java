@@ -124,7 +124,7 @@ public class AddLocationActivity extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "Adding location...", Toast.LENGTH_SHORT).show();
 
-            final String url = "http://localist.000webhostapp.com/?location=1&email=" + emailString +
+            final String url = "http://<website-link>/?location=1&email=" + emailString +
                     "&name=" + removeSpaces(name) + "&latitude=" + Latitude + "&longitude=" + Longitude;
 
             // Request a string response
