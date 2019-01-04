@@ -40,7 +40,7 @@ public class AllLocationActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "Fetching locations...", Toast.LENGTH_SHORT).show();
 
-        final String url = "http://localist.000webhostapp.com/?location=2&email=" + emailString;
+        final String url = "http://<website-link>/?location=2&email=" + emailString;
 
         // Request a string response
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
