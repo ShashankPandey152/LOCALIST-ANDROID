@@ -43,7 +43,7 @@ public class EditLocationActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "Deleting location...", Toast.LENGTH_SHORT).show();
 
-        final String url = "http://localist.000webhostapp.com/?edit=2&id=" + id;
+        final String url = "http://<website-link>/?edit=2&id=" + id;
 
         // Request a string response
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -98,7 +98,7 @@ public class EditLocationActivity extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "Saving changes...", Toast.LENGTH_SHORT).show();
 
-            final String url = "http://localist.000webhostapp.com/?edit=1&id=" + id + "&name=" + devoidOfSpace(name);
+            final String url = "http://<website-link>/?edit=1&id=" + id + "&name=" + devoidOfSpace(name);
 
             // Request a string response
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
