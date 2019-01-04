@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Logging you in...", Toast.LENGTH_SHORT).show();
 
-                final String url = "http://localist.000webhostapp.com/?login=1&email=" + emailString + "&password=" + passwordString;
+                final String url = "http://<website-link>/?login=1&email=" + emailString + "&password=" + passwordString;
 
                 // Request a string response
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
