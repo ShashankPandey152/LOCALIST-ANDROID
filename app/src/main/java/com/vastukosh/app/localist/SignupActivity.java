@@ -65,7 +65,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Signing you up...", Toast.LENGTH_SHORT).show();
 
-                final String url = "http://localist.000webhostapp.com/?signup=1&email=" +
+                final String url = "http://<website-link>/?signup=1&email=" +
                         emailString + "&password=" + passwordString + "&name=" + nameString;
 
                 // Request a string response
