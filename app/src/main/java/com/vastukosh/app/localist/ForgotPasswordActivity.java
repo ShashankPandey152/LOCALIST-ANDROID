@@ -40,7 +40,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Sending mail...", Toast.LENGTH_SHORT).show();
 
-                final String url = "http://localist.000webhostapp.com/?forgot=1&email=" + emailString;
+                final String url = "http://<website-link>/?forgot=1&email=" + emailString;
 
                 // Request a string response
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
